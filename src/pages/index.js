@@ -1,32 +1,22 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
+import Header from "../components/header"
+import Footer from "../components/footer"
 
-export default () => (
+export default ({ data }) => (
   <div>
     <div>
-      <header classname="header">
-        <div classname="container">
-          <div classname="site">
-            <a href="base-index.html">
-              <img src="/images/logo.svg" alt="ESSENTIALS" />
-            </a>
-          </div>
-          <nav classname="nav">
-            <ul>
-              <li>
-                <a href="base-index.html">TOP</a>
-              </li>
-              <li>
-                <a href="base-about.html">ABOUT</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-      <section classname="hero">
+      <Header />
+      <section className="hero">
         <figure>
-          <img src="/images/hero.jpg" alt="" />
+          <Img
+            fluid={data.hero.childImageSharp.fluid}
+            alt=""
+            style={{ height: "100%" }}
+          />
         </figure>
-        <div classname="catch">
+        <div className="catch">
           <h1>
             There is no love sincerer than
             <br />
@@ -34,19 +24,19 @@ export default () => (
           </h1>
           <p>食物を愛するよりも誠実な愛はない ― バーナード・ショー</p>
         </div>
-        <div classname="wave">
+        <div className="wave">
           <img src="/images/wave.svg" alt="" />
         </div>
       </section>
-      <section classname="food">
-        <div classname="container">
-          <h2 classname="bar">
+      <section className="food">
+        <div className="container">
+          <h2 className="bar">
             Food <span>Essence</span>
           </h2>
-          <div classname="details">
-            <div classname="detail">
+          <div className="details">
+            <div className="detail">
               <figure>
-                <img src="/images/fruit.jpg" alt="" />
+                <Img fluid={data.fruit.childImageSharp.fluid} alt="" />
               </figure>
               <h3>フルーツ</h3>
               <p>FRUIT</p>
@@ -56,9 +46,9 @@ export default () => (
                 旬のフルーツを満喫します。
               </p>
             </div>
-            <div classname="detail">
+            <div className="detail">
               <figure>
-                <img src="/images/grain.jpg" alt="" />
+                <Img fluid={data.grain.childImageSharp.fluid} alt="" />
               </figure>
               <h3>穀物</h3>
               <p>GRAIN</p>
@@ -68,9 +58,9 @@ export default () => (
                 毎日の活動のエネルギー源になります。
               </p>
             </div>
-            <div classname="detail">
+            <div className="detail">
               <figure>
-                <img src="/images/beverage.jpg" alt="" />
+                <Img fluid={data.beverage.childImageSharp.fluid} alt="" />
               </figure>
               <h3>飲み物</h3>
               <p>BEVERAGE</p>
@@ -83,73 +73,63 @@ export default () => (
           </div>
         </div>
       </section>
-      <section classname="photo">
-        <h2 classname="sr-only">Photo</h2>
+      <section className="photo">
+        <h2 className="sr-only">Photo</h2>
         <figure>
-          <img src="/images/berry.jpg" alt="赤く熟したベリー" />
+          <Img
+            fluid={data.berry.childImageSharp.fluid}
+            alt=""
+            style={{ height: "100%" }}
+          />
         </figure>
       </section>
-      <footer classname="footer">
-        <div classname="container">
-          <div classname="site">
-            <a href="base-index.html">
-              <img src="/images/logo-w.svg" alt="ESSENTIALS" />
-              <p>おいしい食材と食事を探求するサイト</p>
-            </a>
-          </div>
-          <ul classname="sns">
-            <li>
-              <a href="https://twitter.com/">
-                <i classname="fab fa-twitter">
-                  <span classname="sr-only">Twitter</span>
-                </i>
-              </a>
-              <i classname="fab fa-twitter"></i>
-            </li>
-            <i classname="fab fa-twitter">
-              <li>
-                <a href="https://facebook.com/">
-                  <i classname="fab fa-facebook-square">
-                    <span classname="sr-only">Facebook</span>
-                  </i>
-                </a>
-                <i classname="fab fa-facebook-square"></i>
-              </li>
-              <i classname="fab fa-facebook-square">
-                <li>
-                  <a href="http://instagram.com/">
-                    <i classname="fab fa-instagram">
-                      <span classname="sr-only">Instagram</span>
-                    </i>
-                  </a>
-                  <i classname="fab fa-instagram"></i>
-                </li>
-                <i classname="fab fa-instagram"></i>
-              </i>
-            </i>
-          </ul>
-          <i classname="fab fa-twitter">
-            <i classname="fab fa-facebook-square">
-              <i classname="fab fa-instagram"></i>
-            </i>
-          </i>
-        </div>
-        <i classname="fab fa-twitter">
-          <i classname="fab fa-facebook-square">
-            <i classname="fab fa-instagram"></i>
-          </i>
-        </i>
-      </footer>
-      <i classname="fab fa-twitter">
-        <i classname="fab fa-facebook-square">
-          <i classname="fab fa-instagram"></i>
-        </i>
-      </i>
+      <Footer />
     </div>
-    <i classname="fab fa-twitter">
-      <i classname="fab fa-facebook-square">
-        <i classname="fab fa-instagram"></i>
-      </i>
-    </i>
   </div>
 )
+export const query = graphql`
+  query {
+    hero: file(relativePath: { eq: "hero.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    fruit: file(relativePath: { eq: "fruit.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    grain: file(relativePath: { eq: "grain.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    beverage: file(relativePath: { eq: "beverage.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    berry: file(relativePath: { eq: "berry.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    pattern: file(relativePath: { eq: "pattern.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
