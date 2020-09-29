@@ -1,13 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import Header from "../components/header"
-import Footer from "../components/footer"
+import Layout from "../components/layout"
 
 export default ({ data }) => (
   <div>
-    <div>
-      <Header />
+    <Layout>
       <section className="hero">
         <figure>
           <Img
@@ -83,8 +81,7 @@ export default ({ data }) => (
           />
         </figure>
       </section>
-      <Footer />
-    </div>
+    </Layout>
   </div>
 )
 export const query = graphql`
